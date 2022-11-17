@@ -14,7 +14,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(array(
+            CategoriaSeeder::class,
+            TipoTelefoneSeeder::class,
+
             ContatoSeeder::class,
+            EnderecoSeeder::class,
+            TelefoneSeeder::class,
+            ContatoHasCategoriaSeeder::class,
         ));
     }
 }
