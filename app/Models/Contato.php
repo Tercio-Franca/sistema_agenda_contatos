@@ -32,5 +32,34 @@ class Contato extends Model
 
     ];
 
+    /**
+     * The Categorias that belong to the contato.
+     *
+     * @return Categoria
+     */
+    public function categoriaRelationship()
+    {
+        return $this->belongsToMany(Categoria::class,'contatos_has_categorias','contatos_id','categoria_id');
+    }
+
+    /**
+     * Get the Endereco that owns the contato.
+     *
+     * @return Endereco
+     */
+    public function enderecoRelationship()
+    {
+        return $this->belongsTo(Endereco::class,'endereco_id');
+    }
+
+    /**
+     * Get the Telefones that belong to the contato.
+     *
+     * @return Telefone
+     */
+    public function telefoneRelationship()
+    {
+        return $this->hasMany(Telefone::class,'contato_id');
+    }
 
 }
