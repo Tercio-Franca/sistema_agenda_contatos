@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contato extends Model
@@ -39,7 +38,7 @@ class Contato extends Model
      */
     public function categoriaRelationship()
     {
-        return $this->belongsToMany(Categoria::class,'contatos_has_categorias','contatos_id','categoria_id');
+        return $this->belongsToMany(Categoria::class,'contatos_has_categorias','contato_id','categoria_id');
     }
 
     /**
