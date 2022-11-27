@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
             CategoriaSeeder::class,
             TipoTelefoneSeeder::class,
 
-            ContatoSeeder::class,
             EnderecoSeeder::class,
+            ContatoSeeder::class,
             TelefoneSeeder::class,
             ContatoHasCategoriaSeeder::class,
         ));
