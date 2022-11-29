@@ -18,7 +18,6 @@ class EnderecoSeeder extends Seeder
             'logradouro' => "Rua 3",
             'numero' => "123",
             'cidade' => "São Cristóvão",
-            'contato_id' => 1,
         ]);
     }
 }
