@@ -25,8 +25,15 @@ class ContatoController extends Controller
      */
     public function index()
     {
-        //
+        $contatos = $this->contatos->all();
+
+        return view('welcome', compact('contatos'));
     }
+
+
+
+    //return view('contatos.index', compact('contatos'));
+
 
     /**
      * Show the form for creating a new resource.
