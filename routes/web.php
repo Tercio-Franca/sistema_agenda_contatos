@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', [ContatoController::class, 'index'])->name('index');
+Route::get('/index', [ContatoController::class, 'index'])->name('contatos.index');
