@@ -30,11 +30,6 @@ class ContatoController extends Controller
         return view('contatos.index', compact('contatos'));
     }
 
-
-
-    //return view('contatos.index', compact('contatos'));
-
-
     /**
      * Show the form for creating a new resource.
      *
