@@ -27,7 +27,7 @@ class ContatoController extends Controller
     {
         $contatos = $this->contatos->all();
 
-        return view('index', compact('contatos'));
+        return view('contatos.index', compact('contatos'));
     }
 
 
