@@ -17,5 +17,9 @@ class CategoriaSeeder extends Seeder
         DB::table('categorias')->insert([
             'nome' => "Vizinhos",
         ]);
+
+        DB::table('categorias')->insert([
+            'nome' => "Amigos",
+        ]);
     }
 }

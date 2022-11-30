@@ -19,5 +19,11 @@ class EnderecoSeeder extends Seeder
             'numero' => "123",
             'cidade' => "São Cristóvão",
         ]);
+
+        DB::table('enderecos')->insert([
+            'logradouro' => "Rua 20",
+            'numero' => "4002",
+            'cidade' => "São Paulo",
+        ]);
     }
 }
