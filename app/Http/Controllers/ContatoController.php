@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Categoria;
 use App\Models\Contato;
+use App\Models\Endereco;
+use App\Models\Telefone;
+use App\Models\TipoTelefone;
 
 class ContatoController extends Controller
 {
