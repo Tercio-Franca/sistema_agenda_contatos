@@ -20,9 +20,9 @@ class ContatoController extends Controller
     public function __construct(Contato $contatos)
     {
         $this->contatos = $contatos;
+        $this->enderecos = new Endereco;
         $this->categorias = Categoria::all()->pluck('nome', 'id');
-        $this->enderecos = Endereco::all()->pluck('nome', 'id');
-        $this->telefones = Telefone::all()->pluck('nome', 'id');;
+        $this->telefones = Telefone::all()->pluck('numero', 'id');
         $this->tipoTelefones = TipoTelefone::all()->pluck('nome', 'id');
     }
 
@@ -46,11 +46,10 @@ class ContatoController extends Controller
     public function create()
     {
         $categorias = $this->categorias;
-        $enderecos = $this->enderecos;
         $telefones = $this->telefones;
         $tipoTelefones = $this->tipoTelefones;
 
-        return view('contatos.form', compact('categorias', 'enderecos', 'telefones', 'tipoTelefones'));
+        return view('contatos.form', compact('categorias', 'telefones', 'tipoTelefones'));
     }
 
     /**
