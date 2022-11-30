@@ -50,7 +50,7 @@ class ContatoController extends Controller
         $telefones = $this->telefones;
         $tipoTelefones = $this->tipoTelefones;
 
-        return view('dispositivos.form', compact('categorias', 'enderecos', 'telefones', 'tipoTelefones'));
+        return view('contatos.form', compact('categorias', 'enderecos', 'telefones', 'tipoTelefones'));
     }
 
     /**
