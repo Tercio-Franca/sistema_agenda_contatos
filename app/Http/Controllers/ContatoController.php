@@ -60,7 +60,16 @@ class ContatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contato = $this->contatos->create([
+            'nome' => $request->nome,
+            'endereco_id' => $this->enderecos->create([
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'cidade' => $request->cidade,
+            ])->id,
+        ]);
+        'categoria_id' => $request->categoria_id,
+        'telefone_id' => $request->telefone_id,
     }
 
     /**
