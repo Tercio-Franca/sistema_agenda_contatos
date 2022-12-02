@@ -17,10 +17,10 @@ class ContatoController extends Controller
      * @param  \App\Models\Contato  $contatos
      * @return void
      */
-    public function __construct(Contato $contatos, Endereco $enderecos)
+    public function __construct(Contato $contatos)
     {
         $this->contatos = $contatos;
-        $this->enderecos = $enderecos;
+        $this->enderecos =  new Endereco;
         $this->categorias = Categoria::all()->pluck('nome', 'id');
         $this->telefones = Telefone::all()->pluck('numero', 'id');
         $this->tipoTelefones = TipoTelefone::all()->pluck('nome', 'id');
@@ -60,25 +60,43 @@ class ContatoController extends Controller
      */
     public function store(Request $request)
     {
-        $contato = $this->contatos->create([
+        dd($contato = $this->contatos->create([
             'nome' => $request->nome,
+            // Caso a chave estrangeira esteja na tabela principal
+
+            // Caso não exista no banco
+
+            // 'endereco' => $request->endereco,  Campo Texto
+            // 'endereco_id' => $request->endereco_id,  Campo Select
             'endereco_id' => $this->enderecos->create([
                 'logradouro' => $request->logradouro,
                 'numero' => $request->numero,
                 'cidade' => $request->cidade,
             ])->id,
-        ]);
+        ]));
 
-        $categorias = $request->categoria;
+        // Caso a chave estrangeira não esteja na tabela principal
 
-        if(isset($categorias)) {
-            foreach($campanhas as $campanha) {
-                $contato->categorias()->attach($campanha);
+        // Caso exista no banco
+        $telefones_id = $request->telefone;
+        if(isset($telefones_id)) {
+            foreach($telefones_id as $telefone_id) {
+                Telefone::where($telefone_id,'id')->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
             }
         }
 
-        
-        'telefone_id' => $request->telefone_id,
+        // Muitos para Muitos
+        $categorias_id = $request->categoria;
+
+        if(isset($categorias_id)) {
+            foreach($categorias_id as $categoria_id) {
+                $contato->categoria()->attach($categoria_id);
+            }
+        }
+
+        return redirect()->route('contatos.index');
     }
 
     /**
