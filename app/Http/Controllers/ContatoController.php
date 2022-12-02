@@ -17,10 +17,10 @@ class ContatoController extends Controller
      * @param  \App\Models\Contato  $contatos
      * @return void
      */
-    public function __construct(Contato $contatos)
+    public function __construct(Contato $contatos, Endereco $enderecos)
     {
         $this->contatos = $contatos;
-        $this->enderecos = new Endereco;
+        $this->enderecos = $enderecos;
         $this->categorias = Categoria::all()->pluck('nome', 'id');
         $this->telefones = Telefone::all()->pluck('numero', 'id');
         $this->tipoTelefones = TipoTelefone::all()->pluck('nome', 'id');
@@ -68,7 +68,16 @@ class ContatoController extends Controller
                 'cidade' => $request->cidade,
             ])->id,
         ]);
-        'categoria_id' => $request->categoria_id,
+
+        $categorias = $request->categoria;
+
+        if(isset($categorias)) {
+            foreach($campanhas as $campanha) {
+                $contato->categorias()->attach($campanha);
+            }
+        }
+
+        
         'telefone_id' => $request->telefone_id,
     }
 
