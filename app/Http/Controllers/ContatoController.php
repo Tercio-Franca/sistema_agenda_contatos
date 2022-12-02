@@ -60,7 +60,7 @@ class ContatoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($contato = $this->contatos->create([
+        $contato = $this->contatos->create([
             'nome' => $request->nome,
             // Caso a chave estrangeira esteja na tabela principal
 
@@ -73,7 +73,7 @@ class ContatoController extends Controller
                 'numero' => $request->numero,
                 'cidade' => $request->cidade,
             ])->id,
-        ]));
+        ]);
 
         // Caso a chave estrangeira não esteja na tabela principal
 
