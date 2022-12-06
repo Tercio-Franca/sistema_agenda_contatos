@@ -123,7 +123,11 @@ class ContatoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contato = $this->contatos->find($id);
+        $categorias = $this->categorias;
+        $telefones = $this->telefones;
+
+        return view('contatos.form', compact('categorias', 'telefones','contato'));
     }
 
     /**
