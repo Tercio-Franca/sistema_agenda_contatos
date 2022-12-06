@@ -139,7 +139,44 @@ class ContatoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $contato = $this->contatos->find($id);
+        $contato->update([
+            'nome' => $request->nome,
+            // Caso a chave estrangeira esteja na tabela principal
+
+            // Caso não exista no banco
+
+            // 'endereco' => $request->endereco,  Campo Texto
+            // 'endereco_id' => $request->endereco_id,  Campo Select
+            'endereco_id' => $this->enderecos->find($contato->endereco->id)->update([
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'cidade' => $request->cidade,
+            ])->id,
+        ]);
+
+        // Caso a chave estrangeira não esteja na tabela principal
+
+        // Caso exista no banco
+        $telefones_id = $request->telefone;
+        if(isset($telefones_id)) {
+            foreach($telefones_id as $telefone_id) {
+                Telefone::where($telefone_id,'id')->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
+            }
+        }
+
+        // Muitos para Muitos
+        $categorias_id = $request->categoria;
+
+        if(isset($categorias_id)) {
+            foreach($categorias_id as $categoria_id) {
+                $contato->categoria()->attach($categoria_id);
+            }
+        }
+
+        return redirect()->route('contatos.index');
     }
 
     /**
