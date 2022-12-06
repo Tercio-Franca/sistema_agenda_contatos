@@ -1,4 +1,4 @@
 <!DOCTYPE html>
+{{$contato}}
 {{$categorias}}
 {{$telefones}}
-{{$tipoTelefones}}
