@@ -1,4 +1,9 @@
 <!DOCTYPE html>
-{{$contato}}
+
+@if(isset($contato)){
+    {{$contato}}
+}
+@endif
+
 {{$categorias}}
 {{$telefones}}
