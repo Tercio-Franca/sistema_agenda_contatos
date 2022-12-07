@@ -20,6 +20,7 @@ class Telefone extends Model
      * @var array
      */
     protected $hidden = [
+        'tipoTelefoneRelationship',
         'created_at',
         'updated_at',
     ];
@@ -30,8 +31,26 @@ class Telefone extends Model
      * @var array
      */
     protected $appends = [
-
+        'tipoTelefone'
     ];
 
+    /**
+     * Get the TipoTelefone attribute.
+     *
+     * @return string
+     */
+    public function getTipoTelefoneAttribute() {
+        return $this->tipoTelefoneRelationship;
+    }
+
+    /**
+     * Get the TipoTelefone that owns the telefone.
+     *
+     * @return TipoTelefone
+     */
+    public function tipoTelefoneRelationship()
+    {
+        return $this->belongsTo(TipoTelefone::class,'tipo_telefone_id');
+    }
 
 }
