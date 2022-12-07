@@ -77,13 +77,20 @@ class ContatoController extends Controller
         // Caso a chave estrangeira não esteja na tabela principal
 
         // Caso exista no banco
-        $telefones_id = $request->telefone;
-        if(isset($telefones_id)) {
-            foreach($telefones_id as $telefone_id) {
-                Telefone::where($telefone_id,'id')->first()->update([
-                    'contato_id' => $contato->id,
-                ]);
-            }
+        $telefone1_novo_id = $request->telefone1;
+        $telefone2_novo_id = $request->telefone2;
+
+
+        if(isset($telefone1_novo_id)) {
+            Telefone::where($telefone1_novo_id,'id')->first()->update([
+                'contato_id' => $contato->id,
+            ]);
+        }
+
+        if(isset($telefone2_novo_id)) {
+            Telefone::where($telefone2_novo_id,'id')->first()->update([
+                'contato_id' => $contato->id,
+            ]);
         }
 
         // Muitos para Muitos
@@ -158,10 +165,53 @@ class ContatoController extends Controller
         // Caso a chave estrangeira não esteja na tabela principal
 
         // Caso exista no banco
-        $telefones_id = $request->telefone;
-        if(isset($telefones_id)) {
-            foreach($telefones_id as $telefone_id) {
-                Telefone::where($telefone_id,'id')->first()->update([
+        $telefone1_novo_id = $request->telefone1;
+        $telefone2_novo_id = $request->telefone2;
+
+        $telefone1_antigo = $contato->telefone->get(0);
+        $telefone2_antigo = $contato->telefone->get(1);
+
+        // Se tiver apenas um telefone relacionado
+        if ($contato->telefone->count() == 1) {
+
+            // Se telefone1 já existir, cria novo relacionamento e apaga o anterior.
+            if (isset($telefone1_novo_id) && ($telefone1_antigo->id != $telefone1_novo_id)) {
+                $telefone1_antigo->update([
+                    'contato_id' => null,
+                ]);
+
+                Telefone::where($telefone1_novo_id,'id')->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
+            }
+
+            if(isset($telefone2_novo_id)) {
+                Telefone::where($telefone2_novo_id,'id')->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
+            }
+
+
+        } else if ($contato->telefone->count() == 2) {
+
+            // Se telefone1 já existir, cria novo relacionamento e apaga o anterior.
+            if (isset($telefone1_novo_id) && ($telefone1_antigo->id != $telefone1_novo_id)) {
+                $telefone1_antigo->update([
+                    'contato_id' => null,
+                ]);
+
+                Telefone::where($telefone1_novo_id,'id')->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
+            }
+
+            // Se telefone2 já existir, cria novo relacionamento e apaga o anterior.
+            if (isset($telefone2_novo_id) && ($telefone2_antigo->id != $telefone2_novo_id)) {
+                $telefone2_antigo->update([
+                    'contato_id' => null,
+                ]);
+
+                Telefone::where($telefone2_novo_id,'id')->first()->update([
                     'contato_id' => $contato->id,
                 ]);
             }
@@ -170,13 +220,16 @@ class ContatoController extends Controller
         // Muitos para Muitos
         $categorias_id = $request->categoria;
 
+        $contato->categoria()->sync(null);
+
         if(isset($categorias_id)) {
             foreach($categorias_id as $categoria_id) {
+                //$categoria_id = Categoria::where($categoria,'nome')->first()->id;
                 $contato->categoria()->attach($categoria_id);
             }
         }
-
-        return redirect()->route('contatos.index');
+ 
+        return redirect()->route('contatos.show', $contato->id);
     }
 
     /**
