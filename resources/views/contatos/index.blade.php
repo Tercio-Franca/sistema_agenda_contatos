@@ -15,6 +15,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Categoria</th>
                     <th scope="col">Telefone</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,10 @@
                     <td>{{$contato->nome}}</td>
                     <td>{{$contato->categoria}}</td>
                     <td>{{$contato->telefone}}</td>
+                    <td>
+                        <a href="{{route('contatos.show', $contato->id)}}">Visualizar</a>
+                        <a href="{{route('contatos.edit', $contato->id)}}">Editar</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
