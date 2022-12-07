@@ -20,6 +20,11 @@ class ContatoHasCategoriaSeeder extends Seeder
         ]);
 
         DB::table('contatos_has_categorias')->insert([
+            'contato_id' => 1,
+            'categoria_id' => 2,
+        ]);
+
+        DB::table('contatos_has_categorias')->insert([
             'contato_id' => 2,
             'categoria_id' => 2,
         ]);
