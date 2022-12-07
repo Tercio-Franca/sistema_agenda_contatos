@@ -18,5 +18,10 @@ class ContatoSeeder extends Seeder
             'nome' => "Luiza Silva",
             'endereco_id' => 1,
         ]);
+
+        DB::table('contatos')->insert([
+            'nome' => "Regina Cazé",
+            'endereco_id' => 2,
+        ]);
     }
 }

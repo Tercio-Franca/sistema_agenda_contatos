@@ -18,5 +18,10 @@ class ContatoHasCategoriaSeeder extends Seeder
             'contato_id' => 1,
             'categoria_id' => 1,
         ]);
+
+        DB::table('contatos_has_categorias')->insert([
+            'contato_id' => 2,
+            'categoria_id' => 2,
+        ]);
     }
 }

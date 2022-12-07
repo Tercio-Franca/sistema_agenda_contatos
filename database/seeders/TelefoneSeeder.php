@@ -19,5 +19,11 @@ class TelefoneSeeder extends Seeder
             'contato_id' => 1,
             'tipo_telefone_id' => 1,
         ]);
+
+        DB::table('telefones')->insert([
+            'numero' => "(21)9847-2074",
+            'contato_id' => 2,
+            'tipo_telefone_id' => 1,
+        ]);
     }
 }
