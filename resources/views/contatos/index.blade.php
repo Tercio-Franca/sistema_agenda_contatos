@@ -22,8 +22,16 @@
                 @foreach($contatos as $contato)
                 <tr>
                     <td>{{$contato->nome}}</td>
-                    <td>{{$contato->categoria}}</td>
-                    <td>{{$contato->telefone}}</td>
+                    <td>
+                        @foreach ($contato->categoria as $categoria)
+                            {{$categoria->nome}};
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($contato->telefone as $telefone)
+                            {{$telefone->numero}} ({{$telefone->tipoTelefone->nome}});
+                        @endforeach
+                    </td>
                     <td>
                         <a href="{{route('contatos.show', $contato->id)}}">Visualizar</a>
                         <a href="{{route('contatos.edit', $contato->id)}}">Editar</a>
