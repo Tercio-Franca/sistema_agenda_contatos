@@ -1,20 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
         <title>SAC - Listagem de Contatos</title>
     </head>
     <body>
         <h1>Listagem de Contatos</h1>
+
+        <a href="{{route('contatos.create')}}">+ Novo Contato</a>
+        <br><br/>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Telefone</th>
+                    <th scope="col">Categorias</th>
+                    <th scope="col">Telefones</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
