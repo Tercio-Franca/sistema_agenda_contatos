@@ -1,9 +1,30 @@
 <!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @if(isset($contato))
+            <title>SAC - Visualização do Contato</title>
 
-@if(isset($contato)){
-    {{$contato}}
-}
-@endif
+        @else
+            <title>SAC - Criação de Contato</title>
 
-{{$categorias}}
-{{$telefones}}
+        @endif
+    </head>
+    <body>
+        @csrf
+        <label for="nome" class="form-check-label">Nome:</label>
+        <input placeholder="Somente Letras" name="nome" type="text" id="nome" value="{{isset($contato) ? $contato->nome : null}}">
+
+
+        @if(isset($contato))
+            {{$contato->nome}}
+        @else
+            {{null}}
+        @endif
+
+        {{-- {{$categorias}}
+        {{$telefones}} --}}
+
+    </body>
+</html>
