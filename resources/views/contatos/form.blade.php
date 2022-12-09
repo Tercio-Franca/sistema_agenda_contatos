@@ -16,6 +16,8 @@
         <label for="nome" class="form-check-label">Nome:</label>
         <input placeholder="Somente Letras" name="nome" type="text" id="nome" value="{{isset($contato) ? $contato->nome : null}}">
 
+        {!!Form::label('nome', 'Nome:', ['class' => 'form-check-label'])!!}
+        {!!Form::text('nome',   isset($contato) ? $contato->nome : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
 
         @if(isset($contato))
             {{$contato->nome}}
