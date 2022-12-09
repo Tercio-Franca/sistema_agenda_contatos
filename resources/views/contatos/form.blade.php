@@ -13,17 +13,31 @@
     </head>
     <body>
         @csrf
-        <label for="nome" class="form-check-label">Nome:</label>
-        <input placeholder="Somente Letras" name="nome" type="text" id="nome" value="{{isset($contato) ? $contato->nome : null}}">
 
         {!!Form::label('nome', 'Nome:', ['class' => 'form-check-label'])!!}
-        {!!Form::text('nome',   isset($contato) ? $contato->nome : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
+        {!!Form::text('nome', isset($contato) ? $contato->nome : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
 
-        @if(isset($contato))
+        {!!Form::label('logradouro', 'Logradouro:', ['class' => 'form-check-label'])!!}
+        {!!Form::text('logradouro', isset($contato) ? $contato->endereco->logradouro : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
+
+        {!!Form::label('numero', 'Número:', ['class' => 'form-check-label'])!!}
+        {!!Form::text('numero', isset($contato) ? $contato->endereco->numero : null, ['class' => 'form-control','placeholder' => 'Somente Números',  $form??null])!!}
+
+        {!!Form::label('cidade', 'Cidade:', ['class' => 'form-check-label'])!!}
+        {!!Form::text('cidade', isset($contato) ? $contato->endereco->cidade : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
+
+        {{-- {{dd($contato->telefone)}} --}}
+        {!!Form::label('telefone1', 'Telefone 1:', ['class' => 'form-check-label'])!!}
+        {!!Form::select('telefone1', $telefones, isset($contato) && ($contato->telefone->get(0) !== null) ? $contato->telefone->get(0)->id : null, ['class' => 'form-control', 'placeholder' => 'Selecione um Telefone', $form??null])!!}
+
+        {!!Form::label('telefone2', 'Telefone 2:', ['class' => 'form-check-label'])!!}
+        {!!Form::select('telefone2', $telefones, isset($contato) && ($contato->telefone->get(1) !== null) ? $contato->telefone->get(1)->id : null, ['class' => 'form-control', 'placeholder' => 'Selecione um Telefone', $form??null])!!}
+
+        {{-- @if(isset($contato))
             {{$contato->nome}}
         @else
             {{null}}
-        @endif
+        @endif --}}
 
         {{-- {{$categorias}}
         {{$telefones}} --}}
