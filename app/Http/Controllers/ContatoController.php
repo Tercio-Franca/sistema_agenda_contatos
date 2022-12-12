@@ -77,18 +77,19 @@ class ContatoController extends Controller
         // Caso a chave estrangeira não esteja na tabela principal
 
         // Caso exista no banco
-        $telefone1_novo_id = $request->telefone1;
-        $telefone2_novo_id = $request->telefone2;
+        $telefone1_novo_id = $request->telefone[0];
+        $telefone2_novo_id = $request->telefone[1];
 
 
         if(isset($telefone1_novo_id)) {
-            Telefone::where($telefone1_novo_id,'id')->first()->update([
+            Telefone::where('id', $telefone1_novo_id)->first()->update([
                 'contato_id' => $contato->id,
             ]);
         }
+        //dd($request->telefone);
 
         if(isset($telefone2_novo_id)) {
-            Telefone::where($telefone2_novo_id,'id')->first()->update([
+            Telefone::where('id',$telefone2_novo_id)->first()->update([
                 'contato_id' => $contato->id,
             ]);
         }
@@ -98,7 +99,7 @@ class ContatoController extends Controller
 
         if(isset($categorias_id)) {
             foreach($categorias_id as $categoria_id) {
-                $contato->categoria()->attach($categoria_id);
+                $contato->categoriaRelationship()->attach($categoria_id);
             }
         }
 
@@ -228,7 +229,7 @@ class ContatoController extends Controller
                 $contato->categoria()->attach($categoria_id);
             }
         }
- 
+
         return redirect()->route('contatos.show', $contato->id);
     }
 
