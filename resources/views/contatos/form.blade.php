@@ -14,6 +14,12 @@
     <body>
         @csrf
 
+        @if (isset($contato))
+            {!! Form::open(['route' => ['contatos.update', $contato->id], 'method' => 'PUT', 'name' => 'form']) !!}
+        @else
+            {!! Form::open(['route' => 'contatos.store', 'method' => 'POST', 'name' => 'form']) !!}
+        @endif
+
         {!!Form::label('nome', 'Nome:', ['class' => 'form-check-label'])!!}
         {!!Form::text('nome', isset($contato) ? $contato->nome : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
 
@@ -37,17 +43,9 @@
         @foreach($categorias as $categoria)
             {!! Form::label("categoria$loop->iteration", $categoria, ['class' => 'labelmargem']) !!}
             {!! Form::checkbox("categoria$loop->iteration", $loop->iteration, false, ['id' => "categoria$loop->iteration", isset($form) ? $form : null]) !!}
-
-            {{-- {!!Form::checkbox('categoria', 'value')!!} --}}
         @endforeach
-        {{-- @if(isset($contato))
-            {{$contato->nome}}
-        @else
-            {{null}}
-        @endif --}}
 
-        {{-- {{$categorias}}
-        {{$telefones}} --}}
-
+        {!! Form::submit('Salvar', ['class' => 'btn btn-success', $form??null]) !!}
+        {!! Form::close() !!}
     </body>
 </html>
