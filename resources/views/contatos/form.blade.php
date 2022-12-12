@@ -33,6 +33,13 @@
         {!!Form::label('telefone2', 'Telefone 2:', ['class' => 'form-check-label'])!!}
         {!!Form::select('telefone2', $telefones, isset($contato) && ($contato->telefone->get(1) !== null) ? $contato->telefone->get(1)->id : null, ['class' => 'form-control', 'placeholder' => 'Selecione um Telefone', $form??null])!!}
 
+        {{-- {{dd($categorias)}} --}}
+        @foreach($categorias as $categoria)
+            {!! Form::label("categoria$loop->iteration", $categoria, ['class' => 'labelmargem']) !!}
+            {!! Form::checkbox("categoria$loop->iteration", $loop->iteration, false, ['id' => "categoria$loop->iteration", isset($form) ? $form : null]) !!}
+
+            {{-- {!!Form::checkbox('categoria', 'value')!!} --}}
+        @endforeach
         {{-- @if(isset($contato))
             {{$contato->nome}}
         @else
