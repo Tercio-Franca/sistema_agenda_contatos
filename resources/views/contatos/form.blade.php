@@ -47,5 +47,11 @@
 
         {!! Form::submit('Salvar', ['class' => 'btn btn-success', $form??null]) !!}
         {!! Form::close() !!}
+
+        @if (isset($contato))
+            {!! Form::open(['route' => ['contatos.destroy', $contato->id], 'method' => 'DELETE', 'name' => 'form'])!!}
+            {!! Form::submit('Excluir', ['class' => 'btn btn-danger', $form??null]) !!}
+            {!! Form::close() !!}
+        @endif
     </body>
 </html>
