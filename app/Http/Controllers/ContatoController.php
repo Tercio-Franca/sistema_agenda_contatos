@@ -163,6 +163,25 @@ class ContatoController extends Controller
             ])->id,
         ]);
 
+        // Exemplo que ilustra como seria o update de endereço sem o tap
+        /*  $endereco = $this->enderecos->find($contato->endereco->id);
+            $endereco->update([
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'cidade' => $request->cidade,
+            ])
+            'endereco_id' => $endereco->id,
+
+        //Como o tap funciona
+            function tap($endereco, update($request->all()))
+            {
+                update($request->all(), $endereco);
+
+                return $endereco;
+            }
+        */
+
+
         // Caso a chave estrangeira não esteja na tabela principal
 
         // Caso exista no banco
