@@ -86,7 +86,6 @@ class ContatoController extends Controller
                 'contato_id' => $contato->id,
             ]);
         }
-        //dd($request->telefone);
 
         if(isset($telefone2_novo_id)) {
             Telefone::where('id',$telefone2_novo_id)->first()->update([
@@ -273,7 +272,7 @@ class ContatoController extends Controller
      */
     public function destroy($id)
     {
-        $contatos = $this->contatos->find($id)->delete();
+        $contato = $this->contatos->find($id)->delete();
         return redirect()->route('contatos.index');
     }
 
