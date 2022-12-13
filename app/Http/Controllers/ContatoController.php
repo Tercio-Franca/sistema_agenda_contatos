@@ -272,7 +272,9 @@ class ContatoController extends Controller
      */
     public function destroy($id)
     {
-        $contato = $this->contatos->find($id)->delete();
+        $contato = $this->contatos->find($id);
+        $contato->endereco->delete();
+        $contato->delete();
         return redirect()->route('contatos.index');
     }
 
