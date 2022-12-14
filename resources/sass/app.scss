@@ -1,17 +1,20 @@
+$fonte-padrao: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+$cor-padrao: #a75050;
+
 h1 {
-    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+    font-family: $fonte-padrao;
     color: grey;
 }
 
 a {
-    color: #4b4b4b;
-    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+    color: $cor-padrao;
+    font-family: $fonte-padrao;
     text-decoration: none;
 }
 
 label {
-    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
-    color: #4b4b4b;
+    color: $cor-padrao;
+    font-family: $fonte-padrao;
 }
 
 body {
@@ -21,7 +24,7 @@ body {
 .table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 50%*2;
 }
 
 #coluna_nome {
