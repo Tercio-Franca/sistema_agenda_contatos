@@ -10,7 +10,7 @@
             <title>SAC - Criação de Contato</title>
 
         @endif
-        <link rel="stylesheet" href="{{asset('style.css')}}">
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
     </head>
     <body>
         @csrf
