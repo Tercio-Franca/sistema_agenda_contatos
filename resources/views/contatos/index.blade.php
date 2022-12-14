@@ -8,17 +8,17 @@
         <title>SAC - Listagem de Contatos</title>
     </head>
     <body>
-        <h1>Listagem de Contatos</h1>
+        <h1 style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: grey">Listagem de Contatos</h1>
 
         <a href="{{route('contatos.create')}}">+ Novo Contato</a>
         <br><br/>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Categorias</th>
-                    <th scope="col">Telefones</th>
-                    <th scope="col">Ações</th>
+                    <th style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" scope="col">Nome</th>
+                    <th style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" scope="col">Categorias</th>
+                    <th style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" scope="col">Telefones</th>
+                    <th style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
