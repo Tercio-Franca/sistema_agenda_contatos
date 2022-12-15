@@ -77,18 +77,18 @@ class ContatoController extends Controller
         // Caso a chave estrangeira não esteja na tabela principal
 
         // Caso exista no banco
-        $telefone1_novo_id = $request->telefone1;
-        $telefone2_novo_id = $request->telefone2;
+        $telefone1_novo_id = $request->telefone[0];
+        $telefone2_novo_id = $request->telefone[1];
 
 
         if(isset($telefone1_novo_id)) {
-            Telefone::where($telefone1_novo_id,'id')->first()->update([
+            Telefone::where('id', $telefone1_novo_id)->first()->update([
                 'contato_id' => $contato->id,
             ]);
         }
 
         if(isset($telefone2_novo_id)) {
-            Telefone::where($telefone2_novo_id,'id')->first()->update([
+            Telefone::where('id',$telefone2_novo_id)->first()->update([
                 'contato_id' => $contato->id,
             ]);
         }
@@ -98,7 +98,7 @@ class ContatoController extends Controller
 
         if(isset($categorias_id)) {
             foreach($categorias_id as $categoria_id) {
-                $contato->categoria()->attach($categoria_id);
+                $contato->categoriaRelationship()->attach($categoria_id);
             }
         }
 
@@ -155,23 +155,41 @@ class ContatoController extends Controller
 
             // 'endereco' => $request->endereco,  Campo Texto
             // 'endereco_id' => $request->endereco_id,  Campo Select
-            'endereco_id' => $this->enderecos->find($contato->endereco->id)->update([
+            'endereco_id' => tap($this->enderecos->find($contato->endereco->id))->update([
                 'logradouro' => $request->logradouro,
                 'numero' => $request->numero,
                 'cidade' => $request->cidade,
             ])->id,
         ]);
 
+        // Exemplo que ilustra como seria o update de endereço sem o tap
+        /*  $endereco = $this->enderecos->find($contato->endereco->id);
+            $endereco->update([
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'cidade' => $request->cidade,
+            ])
+            'endereco_id' => $endereco->id,
+
+        //Como o tap funciona
+            function tap($endereco, update($request->all()))
+            {
+                update($request->all(), $endereco);
+
+                return $endereco;
+            }
+        */
+
+
         // Caso a chave estrangeira não esteja na tabela principal
 
         // Caso exista no banco
-        $telefone1_novo_id = $request->telefone1;
-        $telefone2_novo_id = $request->telefone2;
+        $telefone1_novo_id = $request->telefone[0];
+        $telefone2_novo_id = $request->telefone[1];
 
         $telefone1_antigo = $contato->telefone->get(0);
         $telefone2_antigo = $contato->telefone->get(1);
 
-        // Se tiver apenas um telefone relacionado
         if ($contato->telefone->count() == 1) {
 
             // Se telefone1 já existir, cria novo relacionamento e apaga o anterior.
@@ -180,17 +198,16 @@ class ContatoController extends Controller
                     'contato_id' => null,
                 ]);
 
-                Telefone::where($telefone1_novo_id,'id')->first()->update([
+                Telefone::where('id',$telefone1_novo_id)->first()->update([
                     'contato_id' => $contato->id,
                 ]);
             }
 
             if(isset($telefone2_novo_id)) {
-                Telefone::where($telefone2_novo_id,'id')->first()->update([
+                Telefone::where('id',$telefone2_novo_id)->first()->update([
                     'contato_id' => $contato->id,
                 ]);
             }
-
 
         } else if ($contato->telefone->count() == 2) {
 
@@ -200,7 +217,7 @@ class ContatoController extends Controller
                     'contato_id' => null,
                 ]);
 
-                Telefone::where($telefone1_novo_id,'id')->first()->update([
+                Telefone::where('id',$telefone1_novo_id)->first()->update([
                     'contato_id' => $contato->id,
                 ]);
             }
@@ -211,7 +228,22 @@ class ContatoController extends Controller
                     'contato_id' => null,
                 ]);
 
-                Telefone::where($telefone2_novo_id,'id')->first()->update([
+                Telefone::where('id',$telefone2_novo_id)->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
+            }
+        }
+
+        // Se não tiver algum telefone relacionado
+        else {
+            if (isset($telefone1_novo_id)) {
+                Telefone::where('id',$telefone1_novo_id)->first()->update([
+                    'contato_id' => $contato->id,
+                ]);
+            }
+
+            if (isset($telefone2_novo_id)) {
+                Telefone::where('id',$telefone2_novo_id)->first()->update([
                     'contato_id' => $contato->id,
                 ]);
             }
@@ -220,15 +252,15 @@ class ContatoController extends Controller
         // Muitos para Muitos
         $categorias_id = $request->categoria;
 
-        $contato->categoria()->sync(null);
+        $contato->categoriaRelationship()->sync(null);
 
         if(isset($categorias_id)) {
             foreach($categorias_id as $categoria_id) {
                 //$categoria_id = Categoria::where($categoria,'nome')->first()->id;
-                $contato->categoria()->attach($categoria_id);
+                $contato->categoriaRelationship()->attach($categoria_id);
             }
         }
- 
+
         return redirect()->route('contatos.show', $contato->id);
     }
 
@@ -240,7 +272,9 @@ class ContatoController extends Controller
      */
     public function destroy($id)
     {
-        $contatos = $this->contatos->find($id)->delete();
+        $contato = $this->contatos->find($id);
+        $contato->endereco->delete();
+        $contato->delete();
         return redirect()->route('contatos.index');
     }
 
