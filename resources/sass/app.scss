@@ -1,0 +1,46 @@
+$fonte-padrao: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+$cor-padrao: #352e2e;
+
+h1 {
+    font-family: $fonte-padrao;
+    color: grey;
+}
+
+a {
+    color: $cor-padrao;
+    font-family: $fonte-padrao;
+    text-decoration: none;
+}
+
+label {
+    color: $cor-padrao;
+    font-family: $fonte-padrao;
+}
+
+body {
+    background-color: rgb(250, 251, 242)
+}
+
+.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%*2;
+}
+
+#coluna_nome {
+    font-family: Geneva, Verdana, sans-serif;
+    color: blue;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: #fffefe;
+}
+
+tr:nth-child(even) {
+    background-color: #d3d3d3;
+}
