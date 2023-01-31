@@ -1,12 +1,45 @@
-h1 {
-  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
-  color: grey;
-}
-
 a {
   color: #352e2e;
   font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
   text-decoration: none;
+}
+
+body {
+  background-color: rgb(250, 251, 242);
+}
+
+.btn-outline-primary {
+  margin-bottom: 40px;
+}
+
+.form {
+  margin: 5px 0px;
+  width: 70px;
+}
+
+.card {
+  margin: 5px;
+  padding: 10px;
+}
+
+#coluna_nome {
+  font-family: Geneva, Verdana, sans-serif;
+  color: blue;
+}
+
+div {
+  text-shadow: 19px 2px 4px black;
+}
+
+h1, h1 > a {
+  margin: 40px;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  color: grey;
+}
+
+h2 {
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
 }
 
 label {
@@ -14,19 +47,9 @@ label {
   font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background-color: rgb(250, 251, 242);
-}
-
 .table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
-}
-
-#coluna_nome {
-  font-family: Geneva, Verdana, sans-serif;
-  color: blue;
 }
 
 td, th {

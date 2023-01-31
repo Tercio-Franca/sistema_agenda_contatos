@@ -1,15 +1,48 @@
 $fonte-padrao: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
 $cor-padrao: #352e2e;
 
-h1 {
-    font-family: $fonte-padrao;
-    color: grey;
-}
-
 a {
     color: $cor-padrao;
     font-family: $fonte-padrao;
     text-decoration: none;
+}
+
+body {
+    background-color: rgb(250, 251, 242)
+}
+
+.btn-outline-primary {
+    margin-bottom: 40px;
+}
+
+.form {
+    margin: 5px 0px;
+    width: 70px;
+}
+
+.card {
+    margin: 5px;
+    padding: 10px;
+}
+
+#coluna_nome {
+    font-family: Geneva, Verdana, sans-serif;
+    color: blue;
+}
+
+div {
+    text-shadow: 19px 2px 4px black;
+}
+
+h1, h1 > a {
+    margin: 40px;
+    font-family: $fonte-padrao;
+    color: grey;
+}
+
+h2 {
+    font-family: $fonte-padrao;
+    text-transform: uppercase;
 }
 
 label {
@@ -17,20 +50,13 @@ label {
     font-family: $fonte-padrao;
 }
 
-body {
-    background-color: rgb(250, 251, 242)
-}
 
 .table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 50%*2;
 }
 
-#coluna_nome {
-    font-family: Geneva, Verdana, sans-serif;
-    color: blue;
-}
+
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
