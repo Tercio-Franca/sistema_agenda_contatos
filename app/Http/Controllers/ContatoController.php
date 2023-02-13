@@ -107,7 +107,7 @@ class ContatoController extends Controller
 
     /**
      * Show the profile for a given contato.
-     *
+
      * @param  int  $id
      * @return \Illuminate\View\View
      */
@@ -161,6 +161,12 @@ class ContatoController extends Controller
                 'cidade' => $request->cidade,
             ])->id,
         ]);
+
+        // f1(x,y)
+        // f2(y){
+        //     f3 = f1(2)
+        //     return f3(y)
+        // }
 
         // Exemplo que ilustra como seria o update de endereço sem o tap
         /*  $endereco = $this->enderecos->find($contato->endereco->id);
